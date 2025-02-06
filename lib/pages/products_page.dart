@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/components/application/main_drawer.dart';
 import 'package:shop/components/badge_cart.dart';
-import 'package:shop/components/product_grid.dart';
+import 'package:shop/components/product/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/utils/routes.dart';
 
@@ -20,6 +21,7 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Text('My Store'),
         actions: [
@@ -48,7 +50,8 @@ class _ProductsPageState extends State<ProductsPage> {
           Consumer<Cart>(
             child: IconButton(
               color: Colors.white,
-              onPressed: () => Navigator.of(context).pushNamed(Routes.CART_PAGE),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(Routes.CART_PAGE),
               icon: Icon(Icons.shopping_cart),
             ),
             builder: (ctx, cart, child) => BadgeCart(

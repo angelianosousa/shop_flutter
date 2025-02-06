@@ -11,14 +11,12 @@ class Cart with ChangeNotifier {
 
   int get itemsCount => _items.length;
 
-  String get totalAmount {
+  double get totalAmount {
     double total = 0.0;
 
     _items.forEach((key, cartItem) => total += cartItem.price * cartItem.quantity);
 
-    if (total == 0.0) return 'R\$ 0.00';
-
-    return 'R\$ $total';
+    return total;
   }
 
   void addItem(Product product) {

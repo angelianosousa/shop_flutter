@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CartResume extends StatelessWidget {
+class CartHeader extends StatelessWidget {
   final String totalAmount;
 
-  const CartResume(
+  const CartHeader(
     this.totalAmount, {
     super.key,
   });
@@ -27,7 +27,6 @@ class CartResume extends StatelessWidget {
                   ),
                 ),
                 Chip(
-                  
                   label: Text(
                     totalAmount,
                     style: TextStyle(
@@ -39,12 +38,14 @@ class CartResume extends StatelessWidget {
                   ),
                   backgroundColor: Theme.of(context).primaryColor,
                 ),
-                
               ],
             ),
             TextButton(
               onPressed: () {},
-              child: Text('Comprar'),
+              child: Text(
+                'COMPRAR',
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
             ),
           ],
         ),

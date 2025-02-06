@@ -12,4 +12,8 @@ class CartItem {
     required this.quantity,
     required this.price,
   });
+
+  double get totalAmount {
+    return price * quantity;
+  }
 }
