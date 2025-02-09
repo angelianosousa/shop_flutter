@@ -11,9 +11,10 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text('My Store'),
+            title: Text('Welcome!!'),
             automaticallyImplyLeading: false,
           ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.shopping_bag_outlined),
             title: Text('Produtos'),
@@ -21,13 +22,15 @@ class MainDrawer extends StatelessWidget {
             onTap: () =>
                 Navigator.of(context).pushReplacementNamed(Routes.HOME),
           ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.dns_outlined),
             title: Text('Pedidos'),
             subtitle: Text('Acompanha suas demandas'),
             onTap: () =>
                 Navigator.of(context).pushReplacementNamed(Routes.ORDERS),
-          )
+          ),
+          Divider(),
         ],
       ),
     );

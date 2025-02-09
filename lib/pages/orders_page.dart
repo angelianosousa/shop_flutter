@@ -10,7 +10,6 @@ class OrdersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final OrderList orders = Provider.of<OrderList>(context);
-    final items = orders.items;
 
     return Scaffold(
       drawer: MainDrawer(),
@@ -20,7 +19,7 @@ class OrdersPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: orders.itemsCount,
         itemBuilder: (ctx, i) {
-          return OrderWidget(order: items[i]);
+          return OrderWidget(order: orders.items[i]);
         },
       ),
     );

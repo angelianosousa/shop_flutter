@@ -51,9 +51,12 @@ class CartPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
+
                       onPressed: () {
-                        Provider.of<OrderList>(context, listen: false).addOrder(cart);
-                        cart.clear();
+                        if (items.isNotEmpty) {
+                          Provider.of<OrderList>(context, listen: false).addOrder(cart);
+                          cart.clear();
+                        }
                       },
                       child: Text(
                         'COMPRAR',

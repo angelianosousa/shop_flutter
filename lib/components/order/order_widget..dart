@@ -22,30 +22,37 @@ class _OrderWidgetState extends State<OrderWidget> {
       margin: const EdgeInsets.all(8),
       child: Column(
         children: [
-          ListTile(
-            title: Text(
-              'R\$ ${widget.order.totalFinal.toStringAsFixed(2)}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _expandItem = !_expandItem;
+              });
+            },
+            child: ListTile(
+              title: Text(
+                'R\$ ${widget.order.totalFinal.toStringAsFixed(2)}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            subtitle: Text(
-              DateFormat('dd/MM/yyy hh:mm').format(widget.order.createdAt),
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.expand_more),
-              onPressed: () {
-                setState(() {
-                  _expandItem = !_expandItem;
-                });
-              },
+              subtitle: Text(
+                DateFormat('dd/MM/yyy hh:mm').format(widget.order.createdAt),
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.expand_more),
+                onPressed: () {
+                  setState(() {
+                    _expandItem = !_expandItem;
+                  });
+                },
+              ),
             ),
           ),
           if (_expandItem)
             Container(
-              // color: Colors.grey[400],
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              height: 60 * widget.order.products.length.toDouble(),
+              color: Colors.amber[100],
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
+              height: (45.0 * widget.order.products.length) + 10,
               child: ListView(
                 children: widget.order.products.map((product) {
                   return Row(
@@ -62,7 +69,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                             ),
                           ),
                           Text(
-                              '${product.quantity} x R\$${product.price.toStringAsFixed(2)}')
+                              '${product.quantity} x R\$${product.price.toStringAsFixed(2)}'),
                         ],
                       ),
                       Text(
@@ -73,7 +80,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                   );
                 }).toList(),
               ),
-            )
+            ),
         ],
       ),
     );

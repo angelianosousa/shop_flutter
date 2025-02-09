@@ -18,6 +18,16 @@ class ProductsPage extends StatefulWidget {
 class _ProductsPageState extends State<ProductsPage> {
   bool _showFavoriteOnly = false;
 
+  void filterFavorites(FilterOptions selectedValue) {
+    setState(() {
+      if (selectedValue == FilterOptions.favorite) {
+        _showFavoriteOnly = true;
+      } else {
+        _showFavoriteOnly = false;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,15 +47,7 @@ class _ProductsPageState extends State<ProductsPage> {
                 child: Text('Todos'),
               )
             ],
-            onSelected: (FilterOptions selectedValue) {
-              setState(() {
-                if (selectedValue == FilterOptions.favorite) {
-                  _showFavoriteOnly = true;
-                } else {
-                  _showFavoriteOnly = false;
-                }
-              });
-            },
+            onSelected: filterFavorites,
           ),
           Consumer<Cart>(
             child: IconButton(
