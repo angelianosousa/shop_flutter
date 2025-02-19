@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/order_list.dart';
-import 'package:shop/pages/cart_page.dart';
-import 'package:shop/pages/orders_page.dart';
-import 'package:shop/pages/product_detail.dart';
+import 'package:shop/pages/client/carts/cart_page.dart';
+import 'package:shop/pages/client/orders/orders_page.dart';
+import 'package:shop/pages/client/home/product_detail.dart';
 
-import 'package:shop/pages/products_page.dart';
+import 'package:shop/pages/client/home/products_page.dart';
 import 'package:shop/models/product_list.dart';
+import 'package:shop/pages/manager/product_form.dart';
+import 'package:shop/pages/manager/products_index.dart';
 import 'package:shop/utils/routes.dart';
 
 void main() {
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.red,
             centerTitle: true,
+            foregroundColor: Colors.white,
             titleTextStyle: TextStyle(
               color: Colors.white,
             ),
@@ -51,6 +54,8 @@ class MyApp extends StatelessWidget {
           Routes.PRODUCT_DETAIL: (ctx) => ProductDetail(),
           Routes.CART_PAGE: (ctx) => CartPage(),
           Routes.ORDERS: (ctx) => OrdersPage(),
+          Routes.PRODUCTS: (ctx) => ProductsIndex(),
+          Routes.PRODUCT_FORM: (ctx) => ProductForm(),
         },
       ),
     );
