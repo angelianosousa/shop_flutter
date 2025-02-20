@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/models/cart.dart';
-import 'package:shop/components/cart/cart_item_card.dart';
+import 'package:shop/components/cart/cart_item_widget.dart';
 import 'package:shop/models/order_list.dart';
 
 class CartPage extends StatelessWidget {
@@ -51,7 +51,6 @@ class CartPage extends StatelessWidget {
                       ],
                     ),
                     TextButton(
-
                       onPressed: () {
                         if (items.isNotEmpty) {
                           Provider.of<OrderList>(context, listen: false).addOrder(cart);
@@ -71,7 +70,7 @@ class CartPage extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: items.length,
-                itemBuilder: (ctx, i) => CartItemCard(items[i]),
+                itemBuilder: (ctx, i) => CartItemWidget(items[i]),
               ),
             )
           ],

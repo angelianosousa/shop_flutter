@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/components/application/main_drawer.dart';
 import 'package:shop/components/badge_cart.dart';
-import 'package:shop/components/product/product_grid.dart';
+import 'package:shop/components/home/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/utils/routes.dart';
 

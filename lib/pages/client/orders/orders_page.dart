@@ -16,12 +16,19 @@ class OrdersPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Meus Pedidos'),
       ),
-      body: ListView.builder(
-        itemCount: orders.itemsCount,
-        itemBuilder: (ctx, i) {
-          return OrderWidget(order: orders.items[i]);
-        },
-      ),
+      body: orders.itemsCount > 0
+          ? ListView.builder(
+              itemCount: orders.itemsCount,
+              itemBuilder: (ctx, i) {
+                return OrderWidget(order: orders.items[i]);
+              },
+            )
+          : Center(
+              child: Text(
+                'Sem pedidos por aqui...',
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
     );
   }
 }

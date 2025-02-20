@@ -3,17 +3,16 @@ import 'package:provider/provider.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/cart_item.dart';
 
-class CartItemCard extends StatelessWidget {
+class CartItemWidget extends StatelessWidget {
   final CartItem item;
 
-  const CartItemCard(
+  const CartItemWidget(
     this.item, {
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return Dismissible(
       key: ValueKey(item.id),
       direction: DismissDirection.endToStart,
@@ -28,7 +27,27 @@ class CartItemCard extends StatelessWidget {
           size: 40,
         ),
       ),
-      onDismissed: (_) => Provider.of<Cart>(context, listen: false).removeItem(item.productId),
+      confirmDismiss: (_) {
+        return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text('Remover Item do Carrinho'),
+            content: Text('Tem certeza que quer remover o item ${item.name} ?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(true),
+                child: Text('Sim'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(false),
+                child: Text('Não'),
+              )
+            ],
+          ),
+        );
+      },
+      onDismissed: (_) =>
+          Provider.of<Cart>(context, listen: false).removeItem(item.productId),
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: ListTile(
