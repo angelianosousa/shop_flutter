@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shop/exceptions/http_exception_error.dart';
+import 'package:shop/utils/services.dart';
 
 class Product with ChangeNotifier {
   final String id;
   final String name;
   final String description;
-  final double price ;
+  final double price;
   final String currency;
   final String imageUrl;
   bool isFavorite;
@@ -13,14 +18,32 @@ class Product with ChangeNotifier {
     required this.id,
     required this.name,
     required this.description,
-    required this.price ,
+    required this.price,
     required this.imageUrl,
     this.currency = 'R\$',
     this.isFavorite = false,
   });
 
-  void toggleFavorite(){ 
+  void _toggleFavorite() {
     isFavorite = !isFavorite;
     notifyListeners();
-   }
+  }
+
+  Future<void> toggleFavorite() async {
+    _toggleFavorite();
+
+    final response = await http.patch(
+      Uri.parse('${Services.baseUrl}/products/$id.json'),
+      body: jsonEncode({'isFavorite': isFavorite}),
+    );
+
+    if (response.statusCode >= 400) {
+      _toggleFavorite();
+      throw HttpExceptionError(
+        msg: 'Não foi possível marcar o produto como favorito...',
+        statusCode: response.statusCode,
+      );
+    }
+    
+  }
 }

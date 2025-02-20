@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/exceptions/http_exception_error.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product.dart';
 import 'package:shop/utils/routes.dart';
@@ -23,7 +24,18 @@ class ProductGridItem extends StatelessWidget {
           ),
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
-              onPressed: () => {product.toggleFavorite()},
+              onPressed: () async {
+                try {
+                  product.toggleFavorite();
+                } on HttpExceptionError catch (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(error.toString()),
+                      backgroundColor: Colors.red[700],
+                    ),
+                  );
+                }
+              },
               icon: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: Colors.amberAccent,
