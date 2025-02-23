@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop/models/auth.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/order_list.dart';
+import 'package:shop/pages/app_widget.dart';
 import 'package:shop/pages/client/carts/cart_page.dart';
 import 'package:shop/pages/client/orders/orders_page.dart';
 import 'package:shop/pages/client/home/product_detail.dart';
 
-import 'package:shop/pages/client/home/products_page.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/pages/manager/product_form.dart';
 import 'package:shop/pages/manager/products_index.dart';
@@ -25,22 +26,39 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (_) => Auth(),
+        ),
+        ChangeNotifierProxyProvider<Auth, ProductList>(
+          create: (_) => ProductList(),
+          update: (ctx, auth, previous) {
+            return ProductList(
+              auth.token ?? '',
+              auth.userId ?? '',
+              previous?.items ?? [],
+            );
+          },
+        ),
+        ChangeNotifierProxyProvider<Auth, OrderList>(
+          create: (_) => OrderList(),
+          update: (ctx, auth, previous) {
+            return OrderList(
+              auth.token ?? '',
+              auth.userId ?? '',
+              previous?.items ?? [],
+            );
+          },
+        ),
+        ChangeNotifierProvider(
           create: (_) => Cart(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => ProductList(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => OrderList(),
-        )
       ],
       child: MaterialApp(
         title: 'My Store',
         theme: ThemeData(
           fontFamily: 'Lato',
-          primaryColor: Colors.red,
+          primaryColor: Colors.teal[700],
           appBarTheme: AppBarTheme(
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.teal[700],
             centerTitle: true,
             foregroundColor: Colors.white,
             titleTextStyle: TextStyle(
@@ -50,12 +68,12 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
-          Routes.HOME: (ctx) => ProductsPage(),
-          Routes.PRODUCT_DETAIL: (ctx) => ProductDetail(),
-          Routes.CART_PAGE: (ctx) => CartPage(),
-          Routes.ORDERS: (ctx) => OrdersPage(),
-          Routes.PRODUCTS: (ctx) => ProductsIndex(),
-          Routes.PRODUCT_FORM: (ctx) => ProductForm(),
+          Routes.indexPage: (ctx) => AppWidget(),
+          Routes.cartPage: (ctx) => CartPage(),
+          Routes.ordersPage: (ctx) => OrdersPage(),
+          Routes.productsPage: (ctx) => ProductsIndex(),
+          Routes.productDetailPage: (ctx) => ProductDetail(),
+          Routes.productForm: (ctx) => ProductForm(),
         },
       ),
     );

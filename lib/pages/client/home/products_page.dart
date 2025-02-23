@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop/components/application/main_drawer.dart';
-import 'package:shop/components/badge_cart.dart';
+import 'package:shop/components/application/badge_cart.dart';
 import 'package:shop/components/home/product_grid.dart';
 import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
@@ -33,7 +33,9 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ProductList>(context, listen: false).loadProducts().then((value) {
+    Provider.of<ProductList>(context, listen: false)
+        .loadProducts()
+        .then((value) {
       setState(() => _isLoading = false);
     });
   }
@@ -62,8 +64,7 @@ class _ProductsPageState extends State<ProductsPage> {
           Consumer<Cart>(
             child: IconButton(
               color: Colors.white,
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(Routes.CART_PAGE),
+              onPressed: () => Navigator.of(context).pushNamed(Routes.cartPage),
               icon: Icon(Icons.shopping_cart),
             ),
             builder: (ctx, cart, child) => BadgeCart(

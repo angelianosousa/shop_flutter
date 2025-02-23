@@ -1,8 +1,8 @@
 class Routes {
-  static const HOME = '/';
-  static const PRODUCT_DETAIL = '/products/detail';
-  static const CART_PAGE = '/cart';
-  static const ORDERS = '/orders';
-  static const PRODUCTS = '/manager/products';
-  static const PRODUCT_FORM = '/manager/products/form';
+  static const indexPage = '/';
+  static const productDetailPage = '/products/detail';
+  static const cartPage = '/cart';
+  static const ordersPage = '/orders';
+  static const productsPage = '/manager/products';
+  static const productForm = '/manager/products/form';
 }

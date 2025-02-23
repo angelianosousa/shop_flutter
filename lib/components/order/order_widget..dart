@@ -36,10 +36,10 @@ class _OrderWidgetState extends State<OrderWidget> {
                 ),
               ),
               subtitle: Text(
-                DateFormat('dd/MM/yyy hh:mm').format(widget.order.createdAt),
+                DateFormat('dd/MM/yyyy hh:mm').format(widget.order.createdAt),
               ),
               trailing: IconButton(
-                icon: Icon(Icons.expand_more),
+                icon: Icon(_expandItem ? Icons.expand_less : Icons.expand_more),
                 onPressed: () {
                   setState(() {
                     _expandItem = !_expandItem;

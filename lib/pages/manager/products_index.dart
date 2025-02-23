@@ -21,12 +21,15 @@ class ProductsIndex extends StatelessWidget {
         title: Text('Gerenciar Produtos'),
         actions: [
           IconButton(
-            onPressed: () => Navigator.of(context).pushNamed(Routes.PRODUCT_FORM),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(Routes.productForm),
             icon: Icon(Icons.add),
           ),
+
         ],
       ),
       drawer: MainDrawer(),
+      
       body: RefreshIndicator(
         onRefresh: () => _refreshProducts(context),
         child: Padding(

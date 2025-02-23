@@ -14,7 +14,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(
-        Routes.PRODUCT_FORM,
+        Routes.productForm,
         arguments: product,
       ),
       child: ListTile(
@@ -33,7 +33,7 @@ class ProductItem extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(
-                    Routes.PRODUCT_FORM,
+                    Routes.productForm,
                     arguments: product,
                   );
                 },

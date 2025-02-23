@@ -6,6 +6,7 @@ import 'package:shop/exceptions/http_exception_error.dart';
 import 'package:shop/utils/services.dart';
 
 class Product with ChangeNotifier {
+  String? tokenAuth;
   final String id;
   final String name;
   final String description;
@@ -29,12 +30,12 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavorite() async {
+  Future<void> toggleFavorite(String userId, String tokenAuth) async {
     _toggleFavorite();
 
-    final response = await http.patch(
-      Uri.parse('${Services.baseUrl}/products/$id.json'),
-      body: jsonEncode({'isFavorite': isFavorite}),
+    final response = await http.put(
+      Uri.parse('${Services.baseUrl}/userFavorites/$userId/$id.json?auth=$tokenAuth'),
+      body: jsonEncode(isFavorite),
     );
 
     if (response.statusCode >= 400) {

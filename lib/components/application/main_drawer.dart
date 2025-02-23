@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop/models/auth.dart';
 import 'package:shop/utils/routes.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -11,8 +13,15 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text('Welcome!!'),
+            title: Text('Welcome to My Store!!'),
             automaticallyImplyLeading: false,
+            leading: IconButton(
+              onPressed: () {
+                Provider.of<Auth>(context, listen: false).signOut();
+                Navigator.of(context).pushReplacementNamed(Routes.indexPage);
+              },
+              icon: Icon(Icons.logout),
+            ),
           ),
           Divider(),
           ListTile(
@@ -20,7 +29,7 @@ class MainDrawer extends StatelessWidget {
             title: Text('Produtos'),
             subtitle: Text('Seus itens a um clique'),
             onTap: () =>
-                Navigator.of(context).pushReplacementNamed(Routes.HOME),
+                Navigator.of(context).pushReplacementNamed(Routes.indexPage),
           ),
           Divider(),
           ListTile(
@@ -28,7 +37,7 @@ class MainDrawer extends StatelessWidget {
             title: Text('Pedidos'),
             subtitle: Text('Acompanha suas demandas'),
             onTap: () =>
-                Navigator.of(context).pushReplacementNamed(Routes.ORDERS),
+                Navigator.of(context).pushReplacementNamed(Routes.ordersPage),
           ),
           Divider(),
           ListTile(
@@ -36,9 +45,18 @@ class MainDrawer extends StatelessWidget {
             title: Text('Gerenciar produtos'),
             subtitle: Text('Organize seus produtos'),
             onTap: () =>
-                Navigator.of(context).pushReplacementNamed(Routes.PRODUCTS),
+                Navigator.of(context).pushReplacementNamed(Routes.productsPage),
           ),
           Divider(),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text('Logout'),
+            subtitle: Text('Sair do aplicativo'),
+            onTap: () {
+              Provider.of<Auth>(context, listen: false).signOut();
+              Navigator.of(context).pushReplacementNamed(Routes.indexPage);
+            },
+          ),
         ],
       ),
     );
