@@ -97,7 +97,7 @@ class _AuthFormState extends State<AuthForm> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        height: _isSignIn() ? 290 : 330,
+        height: 290, // _isSignIn() ? 290 : 330,
         width: sizeDevice.width * 0.8,
         child: Form(
           key: _formKey,
@@ -108,8 +108,8 @@ class _AuthFormState extends State<AuthForm> {
                 decoration: InputDecoration(labelText: 'Email'),
                 textInputAction: TextInputAction.next,
                 onSaved: (email) => _authData['email'] = email ?? '',
-                validator: (_email) {
-                  final email = _email ?? '';
+                validator: (userEmail) {
+                  final email = userEmail ?? '';
 
                   if (email.trim().isEmpty || !email.contains('@')) {
                     return 'Informe um e-mail válido!';
@@ -124,8 +124,8 @@ class _AuthFormState extends State<AuthForm> {
                   obscureText: true,
                   onSaved: (password) => _authData['password'] = password ?? '',
                   controller: _passwordController,
-                  validator: (_password) {
-                    final password = _password ?? '';
+                  validator: (userPassword) {
+                    final password = userPassword ?? '';
 
                     if (password.isEmpty || password.length < 5) {
                       return 'A senha deve ter pelo menos 5 caracteres';
@@ -140,8 +140,8 @@ class _AuthFormState extends State<AuthForm> {
                   obscureText: true,
                   validator: _isSignIn()
                       ? null
-                      : (_confirmPass) {
-                          final confirPassword = _confirmPass ?? '';
+                      : (confirmPass) {
+                          final confirPassword = confirmPass ?? '';
 
                           if (confirPassword != _passwordController.text) {
                             return 'As senhas não são iguais';

@@ -7,7 +7,7 @@ import 'package:shop/models/cart.dart';
 import 'package:shop/models/product_list.dart';
 import 'package:shop/utils/routes.dart';
 
-enum FilterOptions { favorite, all }
+enum FilterOptions { favorite, all } 
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
